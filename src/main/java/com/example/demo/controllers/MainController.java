@@ -20,7 +20,7 @@ public class MainController {
 
     @GetMapping("home")
     public String homePage(Model model) throws IOException {
-        List<CryptoExchange> list = coinService.getCoins();
+        List<CryptoExchange> list = coinService.getAllExchanges();
         model.addAttribute("CryptoExchanges",list);
         return "mainPage";
     }

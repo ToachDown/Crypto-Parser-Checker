@@ -3,7 +3,6 @@ create sequence hibernate_sequence start 1 increment 1;
 create table crypto_coin (
         id int8,
         amount float8,
-        logo varchar(255),
         name varchar(255),
         price float8,
         crypto_exchange_id int8,
