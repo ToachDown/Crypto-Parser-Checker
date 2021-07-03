@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,8 +20,15 @@ public class MainController {
     private CoinService coinService;
 
     @GetMapping("home")
-    public String homePage(Model model) throws IOException {
-        List<CryptoExchange> list = coinService.getAllExchanges();
+    public String homePage(@RequestParam(required = false, defaultValue = "") String filter,
+                           @RequestParam(required = false, name = "startPrice") Integer startPrice,
+                           @RequestParam(required = false, name = "endPrice") Integer endPrice,
+                           @RequestParam(required = false, name = "compare") Boolean compare,
+                            Model model) throws IOException {
+        List<CryptoExchange> list = coinService.getAllExchanges(filter, startPrice, endPrice);
+        if(compare != null){
+            model.addAttribute("compare",compare);
+        }
         model.addAttribute("CryptoExchanges",list);
         return "mainPage";
     }
