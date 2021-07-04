@@ -21,7 +21,7 @@
             </div>
         </form>
     </#if>
-    <form action="#" class="my-2">
+    <form action="/v1/krypto/comp" class="my-2">
         <#if compare??>
             <button type="submit" class="btn btn-primary">compare</button>
         </#if>
@@ -42,7 +42,7 @@
                                     <li class="my-1 row">
                                         <p class="col-8">${coin.name} : ${coin.price} $</p>
                                         <#if compare??>
-                                            <input class="col-4" type="checkbox" name="${coin.name}" value="${coin}">
+                                            <input class="col-4" type="checkbox" name="${coin.getName() + '_' + coin.getCryptoExchange().getName()}">
                                         </#if>
                                     </li>
                                 </#list>

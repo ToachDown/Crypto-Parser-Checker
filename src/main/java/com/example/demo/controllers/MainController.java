@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.CryptoCoin;
 import com.example.demo.entities.CryptoExchange;
 import com.example.demo.services.CoinService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/v1/krypto")
@@ -31,6 +33,14 @@ public class MainController {
         }
         model.addAttribute("CryptoExchanges",list);
         return "mainPage";
+    }
+
+    @GetMapping("comp")
+    public String compareCoins(@RequestParam Map<String, String> form,
+                               Model model){
+        List<CryptoCoin> compareList = coinService.getCompareCoins(form);
+        model.addAttribute("coins", compareList);
+        return "compare";
     }
 
 }

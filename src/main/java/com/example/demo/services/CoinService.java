@@ -8,7 +8,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,7 +15,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -58,6 +56,19 @@ public class CoinService {
     @Autowired
     private CoinRepository coinRepository;
 
+    public List<CryptoCoin> getCompareCoins(Map<String,String> form){
+        List<CryptoCoin> result = new ArrayList<>();
+        for (String s : form.keySet()) {
+            List<CryptoCoin> cryptoCoin = coinRepository.findCryptoCoinByName(s.split("_")[0]);
+            for (CryptoCoin coin : cryptoCoin) {
+                if(coin.getCryptoExchange().getName().equals(s.split("_")[1])){
+                    result.add(coin);
+                }
+            }
+        }
+        return result;
+    }
+
     public List<CryptoExchange> getAllExchanges(String filter, Integer startPrice,Integer endPrice){
         List<CryptoExchange> resultList =  new ArrayList<>();
         for (CryptoExchange exchange : exchangeRepository.findAll()) {
@@ -84,7 +95,7 @@ public class CoinService {
         return resultList;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 20000)
     public void updateDatabase() throws IOException {
         List<CryptoExchange> cryptoExchanges = exchangeRepository.findAll();
         for (CryptoExchange cryptoExchange : cryptoExchanges) {
