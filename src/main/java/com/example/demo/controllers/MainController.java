@@ -40,6 +40,10 @@ public class MainController {
                                Model model){
         List<CryptoCoin> compareList = coinService.getCompareCoins(form);
         model.addAttribute("coins", compareList);
+        if(!compareList.isEmpty()){
+            CryptoCoin maxCoin = coinService.findMaximumParams(compareList);
+            model.addAttribute("maxCoin", maxCoin);
+        }
         return "compare";
     }
 

@@ -56,6 +56,16 @@ public class CoinService {
     @Autowired
     private CoinRepository coinRepository;
 
+    public CryptoCoin findMaximumParams(List<CryptoCoin> list){
+            CryptoCoin max = list.get(0);
+            for (CryptoCoin cryptoCoin : list) {
+                if(max.getPrice() > cryptoCoin.getPrice()){
+                    max = cryptoCoin;
+                }
+            }
+            return max;
+    }
+
     public List<CryptoCoin> getCompareCoins(Map<String,String> form){
         List<CryptoCoin> result = new ArrayList<>();
         for (String s : form.keySet()) {
