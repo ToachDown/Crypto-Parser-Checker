@@ -75,10 +75,10 @@ public class AutoUpdateDBService {
                     getCoinKraken(cryptoExchange, jsonObject);
                     break;
                 }
-//                case "kucoin": {
-//                    getCoinKuCoin(cryptoExchange, jsonObject);
-//                    break;
-//                }
+                case "kucoin": {
+                    getCoinKuCoin(cryptoExchange, jsonObject);
+                    break;
+                }
                 default:{
                     break;
                 }
@@ -160,26 +160,33 @@ public class AutoUpdateDBService {
     }
 
     private void getCoinKuCoin(CryptoExchange cryptoExchange, JsonObject jsonObject){
-        JsonObject jsonArray = jsonObject.get("data").getAsJsonObject();
-        Set<String> map = jsonArray.keySet();
+        JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
         Set<CryptoCoin> cryptoCoins = new HashSet<>();
-        for (String s : map) {
+        for (JsonElement jsonElement : jsonArray) {
             CryptoCoin cryptoCoin = null;
-            if (!s.contains("3")) {
-                if (coinRepository.findByName(s) == null) {
-                    cryptoCoin = new CryptoCoin();
+            if(!jsonElement.getAsJsonObject().get("baseCurrency").isJsonNull()){
+                List<CryptoCoin> oldCoins = coinRepository.findCryptoCoinByName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
+                if(!oldCoins.isEmpty()){
+                    for (CryptoCoin oldCoin : oldCoins) {
+                        if(oldCoin.getCryptoExchange().getName().equals(cryptoExchange.getName())){
+                            cryptoCoin = oldCoin;
+                        }
+                    }
+                    if(cryptoCoin == null){
+                        cryptoCoin = new CryptoCoin();
+                        cryptoCoin.setName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
+                    }
                 } else {
-                    cryptoCoin = coinRepository.findByName(s);
+                    cryptoCoin = new CryptoCoin();
+                    cryptoCoin.setName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
                 }
-                cryptoCoin.setName(s);
-
-                if(!jsonArray.get(s).isJsonNull() && cryptoCoin != null){
-                    cryptoCoin.setPrice(jsonArray.get(s).getAsDouble());
-                }
-                if (cryptoCoin != null) {
-                    cryptoCoin.setCryptoExchange(cryptoExchange);
-                    cryptoCoins.add(cryptoCoin);
-                }
+            }
+            if(!jsonElement.getAsJsonObject().get("buy").isJsonNull() && cryptoCoin != null){
+                cryptoCoin.setPrice(jsonElement.getAsJsonObject().get("buy").getAsDouble());
+            }
+            if(cryptoCoin != null) {
+                cryptoCoin.setCryptoExchange(cryptoExchange);
+                cryptoCoins.add(cryptoCoin);
             }
         }
         coinRepository.saveAll(cryptoCoins);

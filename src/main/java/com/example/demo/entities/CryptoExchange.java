@@ -20,14 +20,8 @@ public class CryptoExchange {
     private String name;
     private String url;
 
-    @OneToMany(mappedBy = "cryptoExchange",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cryptoExchange",fetch = FetchType.EAGER)
     private Set<CryptoCoin> coins;
-
-    public CryptoExchange(String name, String url, Set<CryptoCoin> coins) {
-        this.name = name;
-        this.url = url;
-        this.coins = coins;
-    }
 
     @Override
     public String toString() {
