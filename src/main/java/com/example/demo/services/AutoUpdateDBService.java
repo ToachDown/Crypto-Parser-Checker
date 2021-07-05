@@ -75,10 +75,10 @@ public class AutoUpdateDBService {
                     getCoinKraken(cryptoExchange, jsonObject);
                     break;
                 }
-                case "kucoin": {
-                    getCoinKuCoin(cryptoExchange, jsonObject);
-                    break;
-                }
+//                case "kucoin": {
+//                    getCoinKuCoin(cryptoExchange, jsonObject);
+//                    break;
+//                }
                 default:{
                     break;
                 }
@@ -94,16 +94,25 @@ public class AutoUpdateDBService {
             if (!jsonElement.getAsJsonObject().get("name").isJsonNull()) {
                 if(!jsonElement.getAsJsonObject().get("name").getAsString().contains("DOWN") &&
                         !jsonElement.getAsJsonObject().get("name").getAsString().contains("UP")) {
-                    if (coinRepository.findByName(jsonElement.getAsJsonObject().get("name").getAsString()) == null) {
-                        cryptoCoin = new CryptoCoin();
+                    List<CryptoCoin> oldCoins = coinRepository.findCryptoCoinByName(jsonElement.getAsJsonObject().get("name").getAsString());
+                    if(!oldCoins.isEmpty()){
+                        for (CryptoCoin oldCoin : oldCoins) {
+                            if(oldCoin.getCryptoExchange().getName().equals(cryptoExchange.getName())){
+                                cryptoCoin = oldCoin;
+                            }
+                        }
+                        if(cryptoCoin == null){
+                            cryptoCoin = new CryptoCoin();
+                            cryptoCoin.setName(jsonElement.getAsJsonObject().get("name").getAsString());
+                        }
                     } else {
-                        cryptoCoin = coinRepository.findByName(jsonElement.getAsJsonObject().get("name").getAsString());
+                        cryptoCoin = new CryptoCoin();
+                        cryptoCoin.setName(jsonElement.getAsJsonObject().get("name").getAsString());
                     }
-                    cryptoCoin.setName(jsonElement.getAsJsonObject().get("name").getAsString());
                 }
             }
             if (!jsonElement.getAsJsonObject().get("price").isJsonNull() && cryptoCoin != null) {
-                cryptoCoin.setPrice(jsonElement.getAsJsonObject().get("price").getAsDouble()*makerBinance*takerBinance);
+                cryptoCoin.setPrice(jsonElement.getAsJsonObject().get("price").getAsDouble());
             }
             if (cryptoCoin != null) {
                 cryptoCoin.setCryptoExchange(cryptoExchange);
@@ -121,17 +130,24 @@ public class AutoUpdateDBService {
         for (JsonElement jsonElement : jsonArray) {
             CryptoCoin cryptoCoin = null;
             if(!jsonElement.getAsJsonObject().get("asset").isJsonNull()){
-                if(coinRepository.findByName(jsonElement.getAsJsonObject().get("asset").getAsString()) == null){
-                    cryptoCoin = new CryptoCoin();
+                List<CryptoCoin> oldCoins = coinRepository.findCryptoCoinByName(jsonElement.getAsJsonObject().get("asset").getAsString());
+                if(!oldCoins.isEmpty()){
+                    for (CryptoCoin oldCoin : oldCoins) {
+                        if(oldCoin.getCryptoExchange().getName().equals(cryptoExchange.getName())){
+                            cryptoCoin = oldCoin;
+                        }
+                    }
+                    if(cryptoCoin == null){
+                        cryptoCoin = new CryptoCoin();
+                        cryptoCoin.setName(jsonElement.getAsJsonObject().get("asset").getAsString());
+                    }
                 } else {
-                    cryptoCoin = coinRepository.findByName(jsonElement.getAsJsonObject().get("asset").getAsString());
+                    cryptoCoin = new CryptoCoin();
+                    cryptoCoin.setName(jsonElement.getAsJsonObject().get("asset").getAsString());
                 }
-                cryptoCoin.setName(jsonElement.getAsJsonObject().get("asset").getAsString());
             }
             if(!jsonElement.getAsJsonObject().get("price").isJsonNull() && cryptoCoin != null){
-                cryptoCoin.setPrice(jsonElement.getAsJsonObject()
-                        .get("price").getAsDouble()*takerKuCoin*makerKuCoin+coinRepository
-                        .findByName("BTC").getPrice()*constKuCoin);
+                cryptoCoin.setPrice(jsonElement.getAsJsonObject().get("price").getAsDouble());
             }
             if(cryptoCoin != null) {
                 cryptoCoin.setCryptoExchange(cryptoExchange);
@@ -158,7 +174,7 @@ public class AutoUpdateDBService {
                 cryptoCoin.setName(s);
 
                 if(!jsonArray.get(s).isJsonNull() && cryptoCoin != null){
-                    cryptoCoin.setPrice(jsonArray.get(s).getAsDouble()*instantByCardKraken*makerKraken+constKraken);
+                    cryptoCoin.setPrice(jsonArray.get(s).getAsDouble());
                 }
                 if (cryptoCoin != null) {
                     cryptoCoin.setCryptoExchange(cryptoExchange);
