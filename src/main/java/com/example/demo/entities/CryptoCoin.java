@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -18,16 +19,15 @@ public class CryptoCoin {
 
     private String name;
     private double price;
-    private double amount;
+    private double dayChange;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "crypto_exchange_id")
     private CryptoExchange cryptoExchange;
 
-    public CryptoCoin(String name, double price, double amount) {
-        this.name = name;
-        this.price = price;
-        this.amount = amount;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, cryptoExchange);
     }
 
     @Override
@@ -36,7 +36,6 @@ public class CryptoCoin {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price + '\'' +
-                ", amount=" + amount +
                 '}';
     }
 }

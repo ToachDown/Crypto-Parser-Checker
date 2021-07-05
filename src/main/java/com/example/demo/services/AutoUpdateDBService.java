@@ -164,7 +164,8 @@ public class AutoUpdateDBService {
         Set<CryptoCoin> cryptoCoins = new HashSet<>();
         for (JsonElement jsonElement : jsonArray) {
             CryptoCoin cryptoCoin = null;
-            if(!jsonElement.getAsJsonObject().get("baseCurrency").isJsonNull()){
+            if(!jsonElement.getAsJsonObject().get("baseCurrency").isJsonNull() &&
+                    jsonElement.getAsJsonObject().get("quoteCurrency").getAsString().equals("USDT")){
                 List<CryptoCoin> oldCoins = coinRepository.findCryptoCoinByName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
                 if(!oldCoins.isEmpty()){
                     for (CryptoCoin oldCoin : oldCoins) {

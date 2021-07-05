@@ -2,9 +2,9 @@ create sequence hibernate_sequence start 1 increment 1;
 
 create table crypto_coin (
         id int8,
-        amount float8,
         name varchar(255),
         price float8,
+        day_change float8,
         crypto_exchange_id int8,
         primary key (id)
 );
