@@ -11,7 +11,5 @@ public interface CoinRepository extends JpaRepository<CryptoCoin, Long> {
 
     public Set<CryptoCoin> findCryptoCoinsByCryptoExchangeOrderByPriceDesc(CryptoExchange cryptoExchange);
 
-    public CryptoCoin findByName(String name);
-
     public List<CryptoCoin> findCryptoCoinByName(String nameCoin);
 }

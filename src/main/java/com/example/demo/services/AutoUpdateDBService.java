@@ -9,7 +9,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -25,30 +24,6 @@ import java.util.Set;
 @Service
 @EnableScheduling
 public class AutoUpdateDBService {
-
-    @Value("${commision.taker.binance}")
-    private double takerBinance;
-
-    @Value("${commision.maker.binance}")
-    private double makerBinance;
-
-    @Value("${commision.taker.kucoin}")
-    private double takerKuCoin;
-
-    @Value("${commision.maker.kucoin}")
-    private double makerKuCoin;
-
-    @Value("${commision.const.kucoin}")
-    private double constKuCoin;
-
-    @Value("${commision.maker.kraken}")
-    private double makerKraken;
-
-    @Value("${commision.instant.kraken}")
-    private double instantByCardKraken;
-
-    @Value("${commision.const.kraken}")
-    private double constKraken;
 
     @Autowired
     private ExchangeRepository exchangeRepository;
@@ -205,6 +180,5 @@ public class AutoUpdateDBService {
         cryptoExchange.setCoins(cryptoCoins);
         exchangeRepository.save(cryptoExchange);
     }
-
 
 }
