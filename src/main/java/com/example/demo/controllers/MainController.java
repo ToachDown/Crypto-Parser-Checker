@@ -28,9 +28,10 @@ public class MainController {
                            @RequestParam(required = false, name = "compare") Boolean compare,
                             Model model) throws IOException {
         List<CryptoExchange> list = coinService.getAllExchanges(filter, startPrice, endPrice);
-        if(compare != null){
-            model.addAttribute("compare",compare);
-        }
+        model.addAttribute("compare",compare);
+        model.addAttribute("oldFilter", filter);
+        model.addAttribute("oldEndPrice", endPrice);
+        model.addAttribute("oldStartPrice", startPrice);
         model.addAttribute("CryptoExchanges",list);
         return "mainPage";
     }
@@ -43,6 +44,8 @@ public class MainController {
         if(!compareList.isEmpty()){
             CryptoCoin maxCoin = coinService.findMaximumParams(compareList);
             model.addAttribute("maxCoin", maxCoin);
+        } else {
+            return "redirect:/v1/krypto/home";
         }
         return "compare";
     }

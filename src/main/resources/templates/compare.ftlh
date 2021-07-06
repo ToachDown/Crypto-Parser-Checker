@@ -22,13 +22,17 @@
                                     <p >${coin.price} $</p>
                                 </li>
                             <#else>
-                                <li class="text-danger">
+                                <li class="text-warning">
                                     <p>${coin.price} $</p>
                                 </li>
                             </#if>
                             <#if coin.dayChange == maxCoin.dayChange>
                                 <li class="text-success">
                                     <p >${coin.dayChange} %</p>
+                                </li>
+                            <#elseif coin.dayChange < maxCoin.dayChange && 0 <coin.dayChange>
+                                <li class="text-warning">
+                                    <p>${coin.dayChange} %</p>
                                 </li>
                             <#else>
                                 <li class="text-danger">

@@ -16,6 +16,15 @@
     <#else>
         <form action="/v1/krypto/home" method="get">
             <div>
+                <#if oldFilter??>
+                    <input type="hidden" name="filter" value="${oldFilter}">
+                </#if>
+                <#if oldEndPrice??>
+                    <input type="hidden" name="endPrice" value="${oldEndPrice}">
+                </#if>
+                <#if oldStartPrice??>
+                    <input type="hidden" name="startPrice" value="${oldStartPrice}">
+                </#if>
                 <input type="hidden" name="compare" value="true">
                 <button class="btn btn-primary" type="submit">select to Compare</button>
             </div>
@@ -42,7 +51,7 @@
                                     <li class="my-1 row">
                                         <p class="col-4">${coin.name} :</p>
                                         <p class="col-6">${coin.price} $
-                                            <#if 0 < coin.dayChange>
+                                            <#if coin.dayChange < 0>
                                                 <sup class="text-danger">${coin.dayChange} %</sup>
                                             <#else>
                                                 <sup class="text-success">${coin.dayChange} %</sup>

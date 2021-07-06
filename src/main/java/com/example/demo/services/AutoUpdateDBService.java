@@ -172,20 +172,22 @@ public class AutoUpdateDBService {
             CryptoCoin cryptoCoin = null;
             if(!jsonElement.getAsJsonObject().get("baseCurrency").isJsonNull() &&
                     jsonElement.getAsJsonObject().get("quoteCurrency").getAsString().equals("USDT")){
-                List<CryptoCoin> oldCoins = coinRepository.findCryptoCoinByName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
-                if(!oldCoins.isEmpty()){
-                    for (CryptoCoin oldCoin : oldCoins) {
-                        if(oldCoin.getCryptoExchange().getName().equals(cryptoExchange.getName())){
-                            cryptoCoin = oldCoin;
+                if(!jsonElement.getAsJsonObject().get("baseCurrency").getAsString().contains("3")) {
+                    List<CryptoCoin> oldCoins = coinRepository.findCryptoCoinByName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
+                    if (!oldCoins.isEmpty()) {
+                        for (CryptoCoin oldCoin : oldCoins) {
+                            if (oldCoin.getCryptoExchange().getName().equals(cryptoExchange.getName())) {
+                                cryptoCoin = oldCoin;
+                            }
                         }
-                    }
-                    if(cryptoCoin == null){
+                        if (cryptoCoin == null) {
+                            cryptoCoin = new CryptoCoin();
+                            cryptoCoin.setName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
+                        }
+                    } else {
                         cryptoCoin = new CryptoCoin();
                         cryptoCoin.setName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
                     }
-                } else {
-                    cryptoCoin = new CryptoCoin();
-                    cryptoCoin.setName(jsonElement.getAsJsonObject().get("baseCurrency").getAsString());
                 }
             }
             if(!jsonElement.getAsJsonObject().get("buy").isJsonNull() && cryptoCoin != null){
