@@ -31,13 +31,17 @@ public class CoinService {
     private CoinRepository coinRepository;
 
     public CryptoCoin findMaximumParams(List<CryptoCoin> list){
-            CryptoCoin max = list.get(0);
+            CryptoCoin idealCoin = new CryptoCoin();
+            idealCoin.setPrice(999999);
             for (CryptoCoin cryptoCoin : list) {
-                if(max.getPrice() > cryptoCoin.getPrice()){
-                    max = cryptoCoin;
+                if(idealCoin.getPrice() > cryptoCoin.getPrice()){
+                    idealCoin.setPrice(cryptoCoin.getPrice());
+                }
+                if(idealCoin.getDayChange() < cryptoCoin.getDayChange()){
+                    idealCoin.setDayChange(cryptoCoin.getDayChange());
                 }
             }
-            return max;
+            return idealCoin;
     }
 
     public List<CryptoCoin> getCompareCoins(Map<String,String> form){

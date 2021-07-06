@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <#list coins as coin>
-                    <th class="display-6 ">${coin.getName()}</th>
+                    <th class="display-6">${coin.getName()}</th>
                 </#list>
             </tr>
         </thead>
@@ -17,13 +17,22 @@
                 <#list coins as coin>
                     <th>
                         <ul>
-                            <#if coin.id == maxCoin.id>
+                            <#if coin.price == maxCoin.price>
                                 <li class="text-success">
                                     <p >${coin.price} $</p>
                                 </li>
                             <#else>
                                 <li class="text-danger">
                                     <p>${coin.price} $</p>
+                                </li>
+                            </#if>
+                            <#if coin.dayChange == maxCoin.dayChange>
+                                <li class="text-success">
+                                    <p >${coin.dayChange} %</p>
+                                </li>
+                            <#else>
+                                <li class="text-danger">
+                                    <p>${coin.dayChange} %</p>
                                 </li>
                             </#if>
                             <li>

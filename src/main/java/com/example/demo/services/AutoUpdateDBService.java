@@ -114,6 +114,9 @@ public class AutoUpdateDBService {
             if (!jsonElement.getAsJsonObject().get("price").isJsonNull() && cryptoCoin != null) {
                 cryptoCoin.setPrice(jsonElement.getAsJsonObject().get("price").getAsDouble());
             }
+            if(!jsonElement.getAsJsonObject().get("dayChange").isJsonNull() && cryptoCoin != null){
+                cryptoCoin.setDayChange(jsonElement.getAsJsonObject().get("dayChange").getAsDouble());
+            }
             if (cryptoCoin != null) {
                 cryptoCoin.setCryptoExchange(cryptoExchange);
                 list.add(cryptoCoin);
@@ -148,6 +151,9 @@ public class AutoUpdateDBService {
             }
             if(!jsonElement.getAsJsonObject().get("price").isJsonNull() && cryptoCoin != null){
                 cryptoCoin.setPrice(jsonElement.getAsJsonObject().get("price").getAsDouble());
+            }
+            if(!jsonElement.getAsJsonObject().get("performance").getAsJsonObject().get("24h").isJsonNull() && cryptoCoin != null){
+                cryptoCoin.setDayChange(jsonElement.getAsJsonObject().get("performance").getAsJsonObject().get("24h").getAsDouble()*100);
             }
             if(cryptoCoin != null) {
                 cryptoCoin.setCryptoExchange(cryptoExchange);
@@ -184,6 +190,9 @@ public class AutoUpdateDBService {
             }
             if(!jsonElement.getAsJsonObject().get("buy").isJsonNull() && cryptoCoin != null){
                 cryptoCoin.setPrice(jsonElement.getAsJsonObject().get("buy").getAsDouble());
+            }
+            if(!jsonElement.getAsJsonObject().get("changeRate").isJsonNull() && cryptoCoin != null){
+                cryptoCoin.setDayChange(jsonElement.getAsJsonObject().get("changeRate").getAsDouble()*100);
             }
             if(cryptoCoin != null) {
                 cryptoCoin.setCryptoExchange(cryptoExchange);

@@ -36,6 +36,7 @@ public class CryptoCoin {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price + '\'' +
+                ", day Change=" + dayChange + '\'' +
                 '}';
     }
 }

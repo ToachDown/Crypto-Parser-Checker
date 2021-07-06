@@ -40,9 +40,16 @@
                             <ul>
                                 <#list cryp.coins as coin>
                                     <li class="my-1 row">
-                                        <p class="col-8">${coin.name} : ${coin.price} $</p>
+                                        <p class="col-4">${coin.name} :</p>
+                                        <p class="col-6">${coin.price} $
+                                            <#if 0 < coin.dayChange>
+                                                <sup class="text-danger">${coin.dayChange} %</sup>
+                                            <#else>
+                                                <sup class="text-success">${coin.dayChange} %</sup>
+                                            </#if>
+                                        </p>
                                         <#if compare??>
-                                            <input class="col-4" type="checkbox" name="${coin.getName() + '_' + coin.getCryptoExchange().getName()}">
+                                            <input class="col-2" type="checkbox" name="${coin.getName() + '_' + coin.getCryptoExchange().getName()}">
                                         </#if>
                                     </li>
                                 </#list>
