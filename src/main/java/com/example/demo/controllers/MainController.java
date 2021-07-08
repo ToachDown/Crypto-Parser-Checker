@@ -22,7 +22,7 @@ public class MainController {
     private CoinService coinService;
 
     @GetMapping("home")
-    public String homePage(@RequestParam(required = false, defaultValue = "") String filter,
+    public String mainPage(@RequestParam(required = false, defaultValue = "") String filter,
                            @RequestParam(required = false, name = "startPrice") Integer startPrice,
                            @RequestParam(required = false, name = "endPrice") Integer endPrice,
                            @RequestParam(required = false, name = "compare") Boolean compare,

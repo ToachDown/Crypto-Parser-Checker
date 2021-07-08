@@ -43,15 +43,15 @@ public class AutoUpdateDBService {
             JsonObject jsonObject = root.getAsJsonObject();
             switch(cryptoExchange.getName()) {
                 case "binance": {
-                    getCoinBinance(cryptoExchange, jsonObject);
+                    parseBinance(cryptoExchange, jsonObject);
                     break;
                 }
                 case "kraken": {
-                    getCoinKraken(cryptoExchange, jsonObject);
+                    parseKraken(cryptoExchange, jsonObject);
                     break;
                 }
                 case "kucoin": {
-                    getCoinKuCoin(cryptoExchange, jsonObject);
+                    parseKuCoin(cryptoExchange, jsonObject);
                     break;
                 }
                 default:{
@@ -61,7 +61,7 @@ public class AutoUpdateDBService {
         }
     }
 
-    private void getCoinBinance(CryptoExchange cryptoExchange,JsonObject jsonObject){
+    private void parseBinance(CryptoExchange cryptoExchange,JsonObject jsonObject){
         JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
         Set<CryptoCoin> list = new HashSet<>();
         for (JsonElement jsonElement : jsonArray) {
@@ -102,7 +102,7 @@ public class AutoUpdateDBService {
         exchangeRepository.save(cryptoExchange);
     }
 
-    private void getCoinKraken(CryptoExchange cryptoExchange, JsonObject jsonObject){
+    private void parseKraken(CryptoExchange cryptoExchange, JsonObject jsonObject){
         JsonArray jsonArray = jsonObject.get("result").getAsJsonArray();
         Set<CryptoCoin> cryptoCoins = new HashSet<>();
         for (JsonElement jsonElement : jsonArray) {
@@ -140,7 +140,7 @@ public class AutoUpdateDBService {
         exchangeRepository.save(cryptoExchange);
     }
 
-    private void getCoinKuCoin(CryptoExchange cryptoExchange, JsonObject jsonObject){
+    private void parseKuCoin(CryptoExchange cryptoExchange, JsonObject jsonObject){
         JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
         Set<CryptoCoin> cryptoCoins = new HashSet<>();
         for (JsonElement jsonElement : jsonArray) {
