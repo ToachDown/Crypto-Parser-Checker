@@ -42,7 +42,7 @@ public class MainController {
         List<CryptoCoin> compareList = coinService.getCompareCoins(form);
         model.addAttribute("coins", compareList);
         if(!compareList.isEmpty()){
-            CryptoCoin maxCoin = coinService.findMaximumParams(compareList);
+            CryptoCoin maxCoin = coinService.findIdealParams(compareList);
             model.addAttribute("maxCoin", maxCoin);
         } else {
             return "redirect:/v1/krypto/home";

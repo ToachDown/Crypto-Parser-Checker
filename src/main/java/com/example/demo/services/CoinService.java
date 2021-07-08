@@ -22,7 +22,7 @@ public class CoinService {
     @Autowired
     private CoinRepository coinRepository;
 
-    public CryptoCoin findMaximumParams(List<CryptoCoin> list){
+    public CryptoCoin findIdealParams(List<CryptoCoin> list){
             CryptoCoin idealCoin = new CryptoCoin();
             idealCoin.setPrice(999999);
             for (CryptoCoin cryptoCoin : list) {
