@@ -24,3 +24,5 @@ insert into crypto_exchange(id, name, url)
 values (1, 'binance', 'https://www.binance.com/bapi/composite/v1/public/marketing/symbol/list'),
        (2, 'kraken', 'https://www.kraken.com/api/internal/cryptowatch/markets/assets?asset=USD&limit=100&assetName=new'),
        (3, 'kucoin', 'https://m.kucoin.com/_api/trade-front/market/getSymbol/USDS?lang=en_US');
+       (4, 'binance', 'https://www.binance.com/bapi/asset/v2/public/asset/asset/get-all-asset');
+       (5, 'kraken', 'https://iapi.kraken.com/api/internal/markets/all/assets?sort_order=descending&page=0&quote_symbol=eur&sort_by=market_cap&page_size=10');

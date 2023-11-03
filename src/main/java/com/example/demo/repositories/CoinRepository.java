@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface CoinRepository extends JpaRepository<CryptoCoin, Long> {
 
-    public Set<CryptoCoin> findCryptoCoinsByCryptoExchangeOrderByPriceDesc(CryptoExchange cryptoExchange);
+    Set<CryptoCoin> findCryptoCoinsByCryptoExchangeOrderByPriceDesc(CryptoExchange cryptoExchange);
 
-    public List<CryptoCoin> findCryptoCoinByName(String nameCoin);
+    List<CryptoCoin> findCryptoCoinByName(String nameCoin);
 }

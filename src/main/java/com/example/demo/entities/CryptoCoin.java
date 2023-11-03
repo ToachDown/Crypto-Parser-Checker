@@ -1,16 +1,16 @@
 package com.example.demo.entities;
 
-import lombok.Getter;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
+@Builder
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class CryptoCoin {
 
     @Id
@@ -25,18 +25,4 @@ public class CryptoCoin {
     @JoinColumn(name = "crypto_exchange_id")
     private CryptoExchange cryptoExchange;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, cryptoExchange);
-    }
-
-    @Override
-    public String toString() {
-        return "CryptoCoin{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price + '\'' +
-                ", day Change=" + dayChange + '\'' +
-                '}';
-    }
 }

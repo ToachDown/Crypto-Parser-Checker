@@ -1,16 +1,17 @@
 package com.example.demo.entities;
 
-import lombok.Getter;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Setter
-@Getter
+@Builder
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class CryptoExchange {
 
@@ -23,13 +24,4 @@ public class CryptoExchange {
     @OneToMany(mappedBy = "cryptoExchange",fetch = FetchType.EAGER)
     private Set<CryptoCoin> coins;
 
-    @Override
-    public String toString() {
-        return "CryptoExchange{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", coins=" + coins +
-                '}';
-    }
 }
