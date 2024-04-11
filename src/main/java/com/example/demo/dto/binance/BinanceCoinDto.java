@@ -1,0 +1,57 @@
+package com.example.demo.dto.binance;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public record BinanceCoinDto(
+        BigInteger id,
+        BigDecimal issuePrice,
+        BigDecimal issuePriceUsed,
+        LocalDateTime issueDate,
+        String source,
+        String name,
+        String fullName,
+        String localFullName,
+        Integer cmcUniqueId,
+        String logo,
+        String symbol,
+        BigInteger circulatingSupply,
+        BigInteger maxSupply,
+        BigInteger totalSupply,
+        BigDecimal volume,
+        BigDecimal volumeGlobal,
+        Integer rank,
+        BigDecimal dayChange,
+        BigInteger dayChangeAmount,
+        BigDecimal marketCap,
+        BigDecimal price,
+        String mapperName,
+        List<String> tags,
+        List<TagInfo> tagInfos,
+        String url,
+        String imageUrl,
+        List<String> explorerUrls,
+        String website,
+        String tradeUrl,
+        String slug,
+        String baseAsset,
+        String quoteAsset,
+        Integer hidden,
+        Boolean specialAsset,
+        Integer reverse,
+        BigInteger listingTime,
+        Integer highLight,
+        Integer legalMoney,
+        BigDecimal marketCapDominance,
+        BigDecimal allTimeHighPrice,
+        LocalDateTime allTimeHighDate,
+        String allTimeHighSource,
+        BigDecimal allTimeLowPrice,
+        LocalDateTime allTimeLowDate,
+        String allTimeLowSource,
+        BigInteger listingCountdown,
+        BigDecimal fullyDilutedMarketCap
+) {
+}

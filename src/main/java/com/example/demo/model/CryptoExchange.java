@@ -1,12 +1,10 @@
-package com.example.demo.entities;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
 
 @Entity
 @Builder
@@ -16,12 +14,9 @@ import java.util.Set;
 public class CryptoExchange {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "crypto_exchange_seq", sequenceName = "crypto_exchange_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "crypto_exchange_seq")
     private long id;
     private String name;
     private String url;
-
-    @OneToMany(mappedBy = "cryptoExchange",fetch = FetchType.EAGER)
-    private Set<CryptoCoin> coins;
-
 }
