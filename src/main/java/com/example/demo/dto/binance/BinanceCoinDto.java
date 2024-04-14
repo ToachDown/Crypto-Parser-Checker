@@ -1,57 +1,64 @@
 package com.example.demo.dto.binance;
 
+import com.example.demo.dto.CoinDto;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record BinanceCoinDto(
-        BigInteger id,
-        BigDecimal issuePrice,
-        BigDecimal issuePriceUsed,
-        LocalDateTime issueDate,
-        String source,
-        String name,
-        String fullName,
-        String localFullName,
-        Integer cmcUniqueId,
-        String logo,
-        String symbol,
-        BigInteger circulatingSupply,
-        BigInteger maxSupply,
-        BigInteger totalSupply,
-        BigDecimal volume,
-        BigDecimal volumeGlobal,
-        Integer rank,
-        BigDecimal dayChange,
-        BigInteger dayChangeAmount,
-        BigDecimal marketCap,
-        BigDecimal price,
-        String mapperName,
-        List<String> tags,
-        List<TagInfo> tagInfos,
-        String url,
-        String imageUrl,
-        List<String> explorerUrls,
-        String website,
-        String tradeUrl,
-        String slug,
-        String baseAsset,
-        String quoteAsset,
-        Integer hidden,
-        Boolean specialAsset,
-        Integer reverse,
-        BigInteger listingTime,
-        Integer highLight,
-        Integer legalMoney,
-        BigDecimal marketCapDominance,
-        BigDecimal allTimeHighPrice,
-        LocalDateTime allTimeHighDate,
-        String allTimeHighSource,
-        BigDecimal allTimeLowPrice,
-        LocalDateTime allTimeLowDate,
-        String allTimeLowSource,
-        BigInteger listingCountdown,
-        BigDecimal fullyDilutedMarketCap
-) {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class BinanceCoinDto extends CoinDto {
+
+    private BigInteger id;
+    private BigDecimal issuePrice;
+    private BigDecimal issuePriceUsed;
+    private LocalDateTime issueDate;
+    private String source;
+    private String name;
+    private String fullName;
+    private String localFullName;
+    private Integer cmcUniqueId;
+    private String logo;
+    private String symbol;
+    private BigInteger circulatingSupply;
+    private BigInteger maxSupply;
+    private BigInteger totalSupply;
+    private BigDecimal volume;
+    private BigDecimal volumeGlobal;
+    private Integer rank;
+    private BigDecimal dayChange;
+    private BigInteger dayChangeAmount;
+    private BigDecimal marketCap;
+    private BigDecimal price;
+    private String mapperName;
+    private List<String> tags;
+    private List<TagInfo> tagInfos;
+    private String url;
+    private String imageUrl;
+    private List<String> explorerUrls;
+    private String website;
+    private String tradeUrl;
+    private String slug;
+    private String baseAsset;
+    private String quoteAsset;
+    private Integer hidden;
+    private Boolean specialAsset;
+    private Integer reverse;
+    private BigInteger listingTime;
+    private Integer highLight;
+    private Integer legalMoney;
+    private BigDecimal marketCapDominance;
+    private BigDecimal allTimeHighPrice;
+    private LocalDateTime allTimeHighDate;
+    private String allTimeHighSource;
+    private BigDecimal allTimeLowPrice;
+    private LocalDateTime allTimeLowDate;
+    private String allTimeLowSource;
+    private BigInteger listingCountdown;
+    private BigDecimal fullyDilutedMarketCap;
 }

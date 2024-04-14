@@ -1,4 +1,4 @@
-package com.example.demo.repositories;
+package com.example.demo.repo;
 
 import com.example.demo.model.CryptoExchange;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public
-interface ExchangeRepository extends JpaRepository<CryptoExchange, Long>{
-
+interface CryptoExchangeRepository extends JpaRepository<CryptoExchange, Long>{
     CryptoExchange findCryptoExchangeByName(String exchangeName);
 }

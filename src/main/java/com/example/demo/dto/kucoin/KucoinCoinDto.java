@@ -1,42 +1,47 @@
 package com.example.demo.dto.kucoin;
 
+import com.example.demo.dto.CoinDto;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
-public record KucoinCoinDto(
-        String symbol,
-        String symbolCode,
-        BigDecimal buy,
-        BigDecimal bidSize,
-        BigDecimal sell,
-        BigDecimal askSize,
-        BigDecimal low,
-        BigDecimal high,
-        BigDecimal open,
-        BigDecimal lastTradedPrice,
-        BigDecimal changeRate,
-        BigDecimal changePrice,
-        MarketChange marketChange1h,
-        MarketChange marketChange4h,
-        MarketChange marketChange24h,
-        Timestamp datetime,
-        BigDecimal vol,
-        BigDecimal volValue,
-        BigDecimal close,
-        String baseCurrency,
-        String quoteCurrency,
-        Boolean trading,
-        Integer sort,
-        Integer board,
-        Integer mark,
-        String market,
-        List<String> markets,
-        BigDecimal averagePrice,
-        BigDecimal takerFeeRate,
-        BigDecimal makerFeeRate,
-        BigDecimal takerCoefficient,
-        BigDecimal makerCoefficient,
-        Boolean marginTrade
-) {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class KucoinCoinDto extends CoinDto {
+    private String symbol;
+    private String symbolCode;
+    private BigDecimal buy;
+    private BigDecimal bidSize;
+    private BigDecimal sell;
+    private BigDecimal askSize;
+    private BigDecimal low;
+    private BigDecimal high;
+    private BigDecimal open;
+    private BigDecimal lastTradedPrice;
+    private BigDecimal changeRate;
+    private BigDecimal changePrice;
+    private MarketChange marketChange1h;
+    private MarketChange marketChange4h;
+    private MarketChange marketChange24h;
+    private Timestamp datetime;
+    private BigDecimal vol;
+    private BigDecimal volValue;
+    private BigDecimal close;
+    private String baseCurrency;
+    private String quoteCurrency;
+    private Boolean trading;
+    private Integer sort;
+    private Integer board;
+    private Integer mark;
+    private String market;
+    private List<String> markets;
+    private BigDecimal averagePrice;
+    private BigDecimal takerFeeRate;
+    private BigDecimal makerFeeRate;
+    private BigDecimal takerCoefficient;
+    private BigDecimal makerCoefficient;
+    private Boolean marginTrade;
 }
